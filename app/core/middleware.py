@@ -1,0 +1,7 @@
+# postgres case
+ENV=dev
+DB=postgresql
+DB_USER=gyu
+DB_PASSWORD=
+DB_HOST=localhost
+DB_PORT=5432
