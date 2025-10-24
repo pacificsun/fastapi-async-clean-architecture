@@ -23,3 +23,7 @@ class PostRead(BaseSchema, BasePost):
     comments: List["CommentRead"] = None
     likes: List["LikeRead"] = None
 
+# for forward references to resolve CommentRead and LikeRead
+from app.schema.comment_schema import CommentRead
+from app.schema.like_schema import LikeRead
+
