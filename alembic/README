@@ -1,1 +1,4 @@
-Generic single-database configuration with an async dbapi.
+# Generic single-database configuration with an async dbapi
+
+- async alembic init: alembic init -t async alembic
+- Import models in alembic env.py
