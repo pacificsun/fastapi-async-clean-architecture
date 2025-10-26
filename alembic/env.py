@@ -10,6 +10,7 @@ from app.model.base_model import BaseModel as Base
 from app.model.comment_model import CommentModel
 from app.model.like_model import LikeModel
 from app.model.post_model import PostModel
+from app.model.user_model import UserModel
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

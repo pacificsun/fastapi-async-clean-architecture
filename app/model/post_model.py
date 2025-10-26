@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import List, Optional
 
-from sqlalchemy import String, Text
+from sqlalchemy import String, Text, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.model.base_model import BaseModel
@@ -12,7 +12,9 @@ class PostModel(BaseModel):
 
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     content: Mapped[str] = mapped_column(Text, nullable=False)
-    author_id: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    author_id: Mapped[str] = mapped_column(String(50),ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+
+    author: Mapped["UserModel"] = relationship("UserModel", back_populates="posts")
 
     # Relationships use forward references (string names). SQLAlchemy will resolve them later.
     comments: Mapped[List["CommentModel"]] = relationship(

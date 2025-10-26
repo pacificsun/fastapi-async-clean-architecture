@@ -10,10 +10,11 @@ from app.model.base_model import BaseModel
 class CommentModel(BaseModel):
     __tablename__ = "comments"
 
-    post_id: Mapped[str] = mapped_column(ForeignKey("posts.id", ondelete="CASCADE"), nullable=False)
-    author_id: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
     content: Mapped[str] = mapped_column(Text, nullable=False)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    post_id: Mapped[str] = mapped_column(ForeignKey("posts.id", ondelete="CASCADE"), nullable=False)
 
+    user: Mapped["UserModel"] = relationship("UserModel", back_populates="comments")
     # Backref to parent Post
     post: Mapped["PostModel"] = relationship("PostModel", back_populates="comments")
 
