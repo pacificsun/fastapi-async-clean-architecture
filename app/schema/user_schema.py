@@ -7,7 +7,7 @@ from app.schema.base_schema import BaseSchema
 
 # _____ Base shared fields for User _____ #
 class BaseUser(BaseModel):
-    full_name: str
+    username: str
     email: EmailStr
 
 
@@ -17,7 +17,7 @@ class UserCreate(BaseUser):
 
 
 class UserUpdate(BaseUser):
-    full_name: Optional[str] = None
+    username: Optional[str] = None
     email: Optional[EmailStr] = None
     password: Optional[str] = None
 

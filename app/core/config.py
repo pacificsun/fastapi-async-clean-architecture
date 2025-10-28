@@ -24,8 +24,9 @@ class Settings(BaseSettings):
     )
 
     # Auth
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "secret")
+    JWT_SECRET_KEY: str = os.getenv("JWT_SECRET_KEY", "secret")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 30  # 30 days
+    ALGORITHM: str = os.getenv("ALGORITHM")
 
     # CORS
     BACKEND_CORS_ORIGINS: List[str] = ["*"]

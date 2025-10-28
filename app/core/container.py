@@ -3,10 +3,13 @@ from dependency_injector import containers, providers
 from app.repositories.post_repository import PostRepository
 from app.repositories.comment_repository import CommentRepository
 from app.repositories.like_repository import LikeRepository
+from app.repositories.user_repository import UserRepository
 
 from app.services.post_service import PostService
 from app.services.comment_service import CommentService
 from app.services.like_service import LikeService
+from app.services.user_service import UserService
+from app.services.auth_service import AuthService
 
 from app.core.database import Database
 from app.core.config import settings
@@ -24,8 +27,11 @@ class Container(containers.DeclarativeContainer):
     post_repository = providers.Factory(PostRepository)
     comment_repository = providers.Factory(CommentRepository)
     like_repository = providers.Factory(LikeRepository)
+    user_repository = providers.Factory(UserRepository)
 
     # Services (per-request)
     post_service = providers.Factory(PostService, repository=post_repository)
     comment_service = providers.Factory(CommentService, repository=comment_repository)
     like_service = providers.Factory(LikeService, repository=like_repository)
+    user_service = providers.Factory(UserService, repository= user_repository) # Injecting UserRepository to UserService
+    auth_service = providers.Factory(AuthService, user_service=user_service) # Injecting user service in auth service.

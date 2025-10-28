@@ -15,9 +15,9 @@ class CommentModel(BaseModel):
     post_id: Mapped[str] = mapped_column(ForeignKey("posts.id", ondelete="CASCADE"), nullable=False)
 
     user: Mapped["UserModel"] = relationship("UserModel", back_populates="comments")
-    # Backref to parent Post
+    # Relationship to Post
     post: Mapped["PostModel"] = relationship("PostModel", back_populates="comments")
-
+    # Relationship to Author (User)
     # Likes on this comment
     likes: Mapped[List["LikeModel"]] = relationship(
         "LikeModel",

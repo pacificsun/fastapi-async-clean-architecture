@@ -21,6 +21,8 @@ class BaseRepository(Generic[T]):
         return result.scalars().all()
 
     async def create(self, session: AsyncSession, obj_in: dict) -> T:
+        if not isinstance(obj_in, dict):
+            obj_in = obj_in.dict() # Convert Pydantic model to dict if necessary
         db_obj = self.model(**obj_in)
         session.add(obj_in)
         await session.commit()
@@ -28,7 +30,7 @@ class BaseRepository(Generic[T]):
         return db_obj
 
     async def update(self, session:AsyncSession, id: UUID, obj_in: dict) -> Optional[T]:
-        stmt = (update(self.model).where(self.model,id == id).values(**obj_in).returning(self.model))
+        stmt = (update(self.model).where(self.model.id == id).values(**obj_in).returning(self.model))
         result = await session.execute(stmt)
         await session.commit()
         return result.scalar_one_or_none() 

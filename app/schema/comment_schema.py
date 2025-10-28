@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from app.schema.base_schema import BaseSchema
 
 class CommentBase(BaseModel):
-    author_id: Optional[str] = None
+    user_id: Optional[str] = None
     content: str
 
 class CommentCreate(CommentBase):

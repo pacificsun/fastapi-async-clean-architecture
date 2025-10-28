@@ -9,7 +9,7 @@ from app.schema.post_schema import PostCreate, PostRead
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
-@router.post("/", response_model=list[PostRead])
+@router.get("/", response_model=list[PostRead])
 @inject
 async def list_posts(
     service: PostService = Depends(Provide[Container.post_service]),

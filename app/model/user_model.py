@@ -23,7 +23,7 @@ class UserModel(BaseModel):
 
     comments: Mapped[List["CommentModel"]] = relationship(
         "CommentModel",
-        back_populates="author",
+        back_populates="user",
         cascade="all, delete-orphan",
         lazy="selectin",
     )

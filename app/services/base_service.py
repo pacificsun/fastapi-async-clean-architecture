@@ -1,4 +1,4 @@
-from typing import Generic, TypeVar, Type, List, Optional
+from typing import Generic, TypeVar, List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.repositories.base_repository import BaseRepository
 
