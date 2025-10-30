@@ -2,7 +2,7 @@ from typing import Optional
 from uuid import UUID
 from pydantic import BaseModel
 
-from app.schema.base_schema import BaseSchema
+from app.schema.base_schema import BaseSchemaInfo
 
 class LikeBase(BaseModel):
     user_id: str 
@@ -12,6 +12,6 @@ class LikeBase(BaseModel):
 class LikeCreate(LikeBase):
     pass
 
-class LikeRead(BaseSchema, LikeBase):
+class LikeRead(BaseSchemaInfo, LikeBase):
     pass
 

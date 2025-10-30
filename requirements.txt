@@ -2,6 +2,7 @@ alembic==1.17.0
 annotated-types==0.7.0
 anyio==4.11.0
 asyncpg==0.30.0
+bcrypt==5.0.0
 certifi==2025.10.5
 click==8.3.0
 dependency-injector==4.48.2
@@ -24,7 +25,6 @@ markdown-it-py==4.0.0
 MarkupSafe==3.0.3
 mdurl==0.1.2
 packaging==25.0
-passlib==1.7.4
 pluggy==1.6.0
 pyasn1==0.6.1
 pydantic==2.12.3

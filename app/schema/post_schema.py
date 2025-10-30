@@ -2,7 +2,7 @@ from typing import List, Optional
 from uuid import UUID
 from pydantic import BaseModel
 
-from app.schema.base_schema import BaseSchema
+from app.schema.base_schema import BaseSchemaInfo
 
 # _____ Base shared fields for Post _____ #
 class BasePost(BaseModel):
@@ -19,7 +19,7 @@ class PostUpdate(BasePost):
     content: Optional[str] = None
 
 # _____ Response/Read Schema for Post _____ #
-class PostRead(BaseSchema, BasePost):
+class PostRead(BaseSchemaInfo, BasePost):
     comments: List["CommentRead"] = None
     likes: List["LikeRead"] = None
 

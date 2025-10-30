@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
-from app.schema.user_schema import UserRead
+from app.schema.user_schema import BaseUser
 
 class SignIn(BaseModel):
     email: EmailStr
@@ -13,15 +13,17 @@ class SignUp(BaseModel):
     email: EmailStr
     password: str
 
-class TokenPayLoad(BaseModel):
+class TokenPayload(BaseModel):
     id: str
     email: EmailStr
     exp: datetime
 
-class SignInResponse(BaseModel):
+class SignInResponse(BaseUser):
     access_token: str
     token_type: str = "bearer"
     expires_at: datetime
-    user: UserRead
+
+    model_config = ConfigDict(from_attributes=True)
+ 
 
 

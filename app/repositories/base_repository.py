@@ -20,14 +20,11 @@ class BaseRepository(Generic[T]):
         result = await session.execute(stmt)
         return result.scalars().all()
 
-    async def create(self, session: AsyncSession, obj_in: dict) -> T:
-        if not isinstance(obj_in, dict):
-            obj_in = obj_in.dict() # Convert Pydantic model to dict if necessary
-        db_obj = self.model(**obj_in)
-        session.add(obj_in)
-        await session.commit()
-        await session.refresh(db_obj)
-        return db_obj
+    async def create(self, session: AsyncSession, obj_in: T) -> T:
+        session.add(obj_in) # add the ORM instance
+        await session.commit() # Commit db
+        await session.refresh(obj_in) # refresh from DB
+        return obj_in
 
     async def update(self, session:AsyncSession, id: UUID, obj_in: dict) -> Optional[T]:
         stmt = (update(self.model).where(self.model.id == id).values(**obj_in).returning(self.model))

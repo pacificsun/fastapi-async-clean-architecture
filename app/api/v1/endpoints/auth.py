@@ -5,11 +5,12 @@ from dependency_injector.wiring import inject, Provide
 from app.core.container import Container
 from app.services.auth_service import AuthService
 from app.schema.auth_schema import SignIn, SignInResponse, SignUp
+from app.schema.user_schema import UserRead
 from app.core.dependencies import get_session
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
-@router.post("/signup", response_model=SignInResponse)
+@router.post("/signup", response_model=UserRead)
 @inject
 async def signup(
     data: SignUp, 

@@ -7,7 +7,7 @@ from app.api.v1.endpoints.user import router as user_router
 from app.api.v1.endpoints.auth import router as auth_router
 
 routers = APIRouter()
-router_list = [post_router, comment_router, like_router, user_router, auth_router]
+router_list = [user_router, post_router, comment_router, like_router, auth_router]
 
 for route in router_list:
     route.tags = route.tags.append("v1") 

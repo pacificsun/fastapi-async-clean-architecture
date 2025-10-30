@@ -1,14 +1,16 @@
 from typing import List, Optional
 from uuid import UUID
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
+from datetime import datetime
 
-from app.schema.base_schema import BaseSchema
+from app.schema.base_schema import BaseSchemaInfo
 
 
 # _____ Base shared fields for User _____ #
 class BaseUser(BaseModel):
-    username: str
     email: EmailStr
+    username: str
+
 
 
 # _____ Schemas for creation and update _____ #
@@ -23,7 +25,21 @@ class UserUpdate(BaseUser):
 
 
 # _____ Read/Response Schema _____ #
-class UserRead(BaseSchema, BaseUser):
+class UserRead(BaseModel):
+    id: UUID
+    email: EmailStr
+    username: str
+    updated_at: datetime
+    created_at: datetime
+    
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+
+
+
+class UserActivity(BaseSchemaInfo, BaseUser):
     posts: List["PostRead"] = []
     comments: List["CommentRead"] = []
     likes: List["LikeRead"] = []
@@ -33,3 +49,5 @@ class UserRead(BaseSchema, BaseUser):
 from app.schema.post_schema import PostRead
 from app.schema.comment_schema import CommentRead
 from app.schema.like_schema import LikeRead
+
+UserRead.model_rebuild()

@@ -2,7 +2,7 @@ from typing import List, Optional
 from uuid import UUID
 from pydantic import BaseModel
 
-from app.schema.base_schema import BaseSchema
+from app.schema.base_schema import BaseSchemaInfo
 
 class CommentBase(BaseModel):
     user_id: Optional[str] = None
@@ -15,7 +15,7 @@ class CommentCreate(CommentBase):
 class CommentUpdate(CommentBase):
     content: Optional[str] = None
 
-class CommentRead(BaseSchema, CommentBase):
+class CommentRead(BaseSchemaInfo, CommentBase):
     post_id: UUID
     likes: Optional[List["LikeRead"]] = None
 

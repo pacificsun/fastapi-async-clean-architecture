@@ -15,7 +15,7 @@ class BaseService(Generic[T]):
     async def get_by_id(self, session: AsyncSession, id: str) -> Optional[T]:
         return await self.repository.get_by_id(session, id)
     
-    async def create(self, session: AsyncSession, obj_in: dict) -> T:
+    async def create(self, session: AsyncSession, obj_in: T) -> T:
         return await self.repository.create(session, obj_in)
     
     async def update(self, session: AsyncSession, id: str, obj_in: dict) -> Optional[T]:

@@ -6,10 +6,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 class UserService(BaseService[UserModel]):
     """Service layer for User Business Logic."""
-    def __init__(self, user_repository: UserRepository):
-        self.user_repository = user_repository
-        super().__init__(user_repository)
+    def __init__(self, repository: UserRepository):
+        self.repository = repository
+        super().__init__(repository)
 
     async def get_by_email(self, session:AsyncSession, email: str) -> UserModel | None:
-        return await self.user_repository.get_by_email(session, email)
+        return await self.repository.get_by_email(session, email)
 
